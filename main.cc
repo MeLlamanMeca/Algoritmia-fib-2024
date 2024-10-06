@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <random>
+#include <algorithm>
 using namespace std;
 
 class Graph {
@@ -19,6 +20,20 @@ class Graph {
         connections.resize(n);
         this->n = n;
         probability = p*100;
+    }
+
+
+    void printGraph() const {
+        cout << "Graph with " << n << " vertices and probability " << probability << ":\n";
+        for (int i = 0; i < n; ++i) {
+            if (exist[i]) {
+                cout << "Vertex " << i << ": ";
+                for (int neighbor : connections[i]) {
+                    cout << neighbor << " ";
+                }
+                cout << endl;
+            }
+        }
     }
 
     void addEdge(int u, int v) {
@@ -100,7 +115,8 @@ void edgePercolation(Graph& g) {
 }
 
 Graph leer_grafo() {
-    int n,p;
+    int n;
+    double p;
     cout << "Introduce el numero de nodos de tu grafo:" << endl;
     cin >> n;
     cout << "Introduce la probabilidad de tu grafo:" << endl;
@@ -129,30 +145,9 @@ int main() {
     int pf = -1;
     int ps = -1;
     
-    cout << "Que quieres hacer?" << endl;
-    cout << "1: Node percolation, 2: Edge percolation" << endl;
-    cout << "1/2 > ";
-    cin >> n;
-    cout << endl;
-
-    cout << "Probabilidad inicial: " << endl;
-    cin >> pi;
-    cout << endl;
-
-    cout << "Probabilidad final: " << endl;
-    cin >> pf;
-    cout << endl;
-
-    cout << "Salto: " << endl;
-    cin >> ps;
-    cout << endl;
-
-    for(int i = pi; i <= pf; i += ps) {
-        Graph gp = g;
-        if(n == '1') nodePercolation(gp);
-        else edgePercolation(gp);
-        gp.transformToUndirected();
-                //parte alejandro
-    }
+    nodePercolation(g);
+    g.transformToUndirected();
+    g.printGraph();
 }
+
 
