@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <list>
+#include <set>
 #include <queue>
 using namespace std;
 
@@ -8,7 +8,7 @@ class grafoNxN {
 private:
     int n;
     vector<bool> exist;
-    vector<list<int>> adyacencias; 
+    vector<set<int>> adyacencias; 
 
 public:
 
@@ -16,18 +16,18 @@ public:
         this->n = n;
         exist.resize(n*n, true);
         //Genero el grafo
-        adyacencias = vector<list<int>>(n*n);
+        adyacencias = vector<set<int>>(n*n);
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {   
 
                 if (j+1 != n) { //Enlazado horizontal
-                    adyacencias[3*i+j].push_back(3*i+j+1); 
-                    adyacencias[3*i+j+1].push_back(3*i+j);
+                    adyacencias[3*i+j].insert(3*i+j+1); 
+                    adyacencias[3*i+j+1].insert(3*i+j);
                 }
 
                 if (i != 0) {   //Enlazado vertical
-                    adyacencias[3*i+j].push_back(3*(i-1)+j);
-                    adyacencias[3*(i-1)+j].push_back(3*i+j);
+                    adyacencias[3*i+j].insert(3*(i-1)+j);
+                    adyacencias[3*(i-1)+j].insert(3*i+j);
                 }
             } 
         }
@@ -61,8 +61,14 @@ public:
         int size = n*n;
         int probability = p*100;
         for(int i = 0; i < size; i++) {
-            for(auto it = adyacencias[i].begin(); it != adyacencias[i].end(); it++) {
-                if (rand() % 100 > probability) it = adyacencias[i].erase(it);
+            for(auto it = adyacencias[i].begin(); it != adyacencias[i].end();) {
+                if (rand() % 100 > probability) {
+                    int neighbor = *it;
+                    it = adyacencias[i].erase(it);
+                    adyacencias[neighbor].erase(i);
+                } else {
+                    ++it;
+                }
             }
         }
     }
