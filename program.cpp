@@ -10,8 +10,15 @@ using namespace std;
 */
 
 int main() {
-    // Estudiamos cada valor de n por separado
+    //Seleccionar semilla para variar la generación de grafos aleatorios
+    unsigned int seed;
+    cout << "Introduzca una semilla: ";
+    cin >> seed;
+    srand(seed);
+    cout << endl;
+
     /*
+    // Estudiamos cada valor de n por separado
     for (int n = 20; n <= 10000; n += 10) {
         grafoNxN g(n);   // Generador de grano nxn base
         for (double q = 0.0; q <= 1.0; q += 0.05) {
@@ -22,12 +29,13 @@ int main() {
     }
     */
 
+    //Debugging
     grafoNxN g(3);
     g.printGraph();
     grafoNxN copia = g;
     copia.edgePercolation(0.5);
     copia.printGraph();
     grafoNxN copia2 = g;
-    copia2.nodePercolation(0.5);
+    copia2.edgePercolation(0.5);
     copia2.printGraph();
 }

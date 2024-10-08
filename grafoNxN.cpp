@@ -70,6 +70,7 @@ public:
                     } 
                     else ++it;
                 }
+                else ++it;
             }
         }
     }
