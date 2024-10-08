@@ -57,8 +57,14 @@ public:
         int size = n*n;
         int probability = p*100;
         for(int i = 0; i < size; i++) {
-            for(auto it = adyacencias[i].begin(); it != adyacencias[i].end(); it++) {
-                if (rand() % 100 > probability) it = adyacencias[i].erase(it);
+            for(auto it = adyacencias[i].begin(); it != adyacencias[i].end();) {
+                if (rand() % 100 > probability) {
+                    int neighbor = *it;
+                    it = adyacencias[i].erase(it);
+                    adyacencias[neighbor].remove(i); // Remove the edge in the opposite direction
+                } else {
+                    ++it;
+                }
             }
         }
     }
