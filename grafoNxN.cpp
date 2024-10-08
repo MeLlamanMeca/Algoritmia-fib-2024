@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <queue>
 using namespace std;
 
 class grafoNxN {
@@ -36,13 +37,16 @@ public:
     //Printea el grafo nxn para comprobar que se haya generado correctamente
     void printGraph() const {
         cout << "Graph with " << n << " vertices:\n";
-        for (int i = 0; i < n; ++i) {
-            cout << "Vertex " << i << ": ";
-            for (int neighbor : adyacencias[i]) {
-                cout << neighbor << " ";
+        for (int i = 0; i < n*n; ++i) {
+            if (exist[i]) {
+                cout << "Vertex " << i << ": ";
+                for (int neighbor : adyacencias[i]) {
+                    cout << neighbor << " ";
+                }
+                cout << endl;
             }
-            cout << endl;
         }
+        cout << "----------------------------------------------" << endl;
     }
 
     void nodePercolation(double p) { //percolacion de nodos
