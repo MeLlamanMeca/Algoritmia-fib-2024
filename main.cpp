@@ -5,14 +5,6 @@
 #include "class/graph/GraphNxN.cpp"
 using namespace std;
 
-int nini = 20;
-int nfin = 10000;
-int nstep = 10;
-double qini = 0.0;
-double qfin = 1.0;
-double qstep = 0.05;
-int muestras = 100;
-
 /*  
     Este main se encarga de procesar y generar todos los grafos 
     almacenando sus datos para su posterior analisis 
@@ -62,6 +54,14 @@ int main(int argc, char* argv[]) {
         usage();
     }
     else {
+
+        int nini = 20;
+        int nfin = 10000;
+        int nstep = 10;
+        double qini = 0.0;
+        double qfin = 1.0;
+        double qstep = 0.05;
+        int muestras = 100;
 
         if (string(argv[1]) == "-quickdev") { // Modo debug
             cout << "Modo debug activado." << endl;
