@@ -55,8 +55,21 @@
         "random": "cpp",
         "*.tcc": "cpp",
         "array": "cpp",
+<<<<<<< HEAD
         "deque": "cpp",
         "ranges": "cpp",
         "span": "cpp"
+=======
+        "cstdarg": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "functional": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "string": "cpp",
+        "fstream": "cpp",
+        "sstream": "cpp"
+>>>>>>> c8cbac4d843ce50e0b2f480a97cbb1a453b08108
     }
 }
