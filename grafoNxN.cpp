@@ -6,12 +6,14 @@ using namespace std;
 class grafoNxN {
 private:
     int n;
+    vector<bool> exist;
     vector<list<int>> adyacencias; 
 
 public:
 
     grafoNxN(int n) {
         this->n = n;
+        exist.resize(n*n, true);
         //Genero el grafo
         adyacencias = vector<list<int>>(n*n);
         for (int i = 0; i < n; ++i) {
@@ -31,8 +33,33 @@ public:
 
 
     //Printea el grafo nxn para comprobar que se haya generado correctamente
-    void printGrafo() {
-
+    void printGraph() const {
+        cout << "Graph with " << n << " vertices:\n";
+        for (int i = 0; i < n; ++i) {
+            cout << "Vertex " << i << ": ";
+            for (int neighbor : adyacencias[i]) {
+                cout << neighbor << " ";
+            }
+            cout << endl;
+        }
     }
+
+    void nodePercolation(double p) { //percolacion de nodos
+        int size = n*n;
+        int probability = p*100;
+        for(int i = 0; i < size; i++) {
+            if (rand() % 100 > probability) g.removeVertex(i);
+        }
+    }
+
+    void edgePercolation(double p) { //percolacion de aristas
+        int size = n*n;
+        int probability = p*100;
+        for(int i = 0; i < size; i++) {
+            for(auto it = adyacencias[i].begin(); it != adyacencias[i].end(); it++) {
+                if (rand() % 100 > probability) it = adyacencias[i].erase(it);
+            }
+    }
+}
 
 };

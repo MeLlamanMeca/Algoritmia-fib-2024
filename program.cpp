@@ -15,6 +15,8 @@ int main() {
         g = grafoNxN(n);
         for (double q = 0.0; q <= 1.0; q += 0.05) {
             for
+            gcopia = g
+            gcopia.
         }
     }
 
