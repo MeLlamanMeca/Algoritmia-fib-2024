@@ -23,7 +23,8 @@ public:
                 }
 
                 if (i != 0) {   //Enlazado vertical
-                    adyacencias[3*i+j].push_back()
+                    adyacencias[3*i+j].push_back(3*(i-1)+j);
+                    adyacencias[3*(i-1)+j].push_back(3*i+j);
                 }
             } 
         }

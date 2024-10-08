@@ -12,7 +12,7 @@ using namespace std;
 int main() {
     // Estudiamos cada valor de n por separado
     for (int n = 20; n <= 10000; n += 10) {
-        g = grafoNxN(n);
+        grafoNxN g = grafoNxN(n);
         for (double q = 0.0; q <= 1.0; q += 0.05) {
             for
         }
