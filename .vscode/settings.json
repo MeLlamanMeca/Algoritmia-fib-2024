@@ -52,6 +52,7 @@
         "xutility": "cpp",
         "algorithm": "cpp",
         "optional": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "*.tcc": "cpp"
     }
 }
