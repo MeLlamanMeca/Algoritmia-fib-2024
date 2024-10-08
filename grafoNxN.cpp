@@ -91,7 +91,7 @@ public:
                     c.pop();
                     visited[vertex] = true;
 
-                    list<int>::iterator it = adyacencias[vertex].begin();
+                    set<int>::iterator it = adyacencias[vertex].begin();
                     while (it != adyacencias[vertex].end()) {
                         if (not visited[*it] and  exist[*it]) c.push(*it);
                         ++it;
