@@ -2,35 +2,20 @@
 #include <vector>
 #include <set>
 #include <queue>
+#include <ciso646>
 using namespace std;
 
-class grafoNxN {
-private:
+class Graph {
+
+protected:
     int n;
     vector<bool> exist;
     vector<set<int>> adyacencias; 
 
 public:
 
-    grafoNxN(int n) {
-        this->n = n;
-        exist.resize(n*n, true);
-        //Genero el grafo
-        adyacencias = vector<set<int>>(n*n);
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {   
-
-                if (j+1 != n) { //Enlazado horizontal
-                    adyacencias[3*i+j].insert(3*i+j+1); 
-                    adyacencias[3*i+j+1].insert(3*i+j);
-                }
-
-                if (i != 0) {   //Enlazado vertical
-                    adyacencias[3*i+j].insert(3*(i-1)+j);
-                    adyacencias[3*(i-1)+j].insert(3*i+j);
-                }
-            } 
-        }
+    Graph() {
+        n = 0;
     }
 
 

@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <set>
+#include <queue>
+#include <ciso646>
+#include "Graph.cpp"
+using namespace std;
+
+class GraphNxN : public Graph {
+
+public:
+    GraphNxN() { //Constructor por defecto
+        GraphNxN(0);
+    }
+    
+    GraphNxN(int n) { //Constructor
+        this->n = n;
+        exist.resize(n*n, true);
+        adyacencias = vector<set<int>>(n*n);
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {   
+
+                if (j+1 != n) { //Enlazado horizontal
+                    adyacencias[3*i+j].insert(3*i+j+1); 
+                    adyacencias[3*i+j+1].insert(3*i+j);
+                }
+
+                if (i != 0) {   //Enlazado vertical
+                    adyacencias[3*i+j].insert(3*(i-1)+j);
+                    adyacencias[3*(i-1)+j].insert(3*i+j);
+                }
+            } 
+        }
+    }
+
+};
