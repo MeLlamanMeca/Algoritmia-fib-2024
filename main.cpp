@@ -71,6 +71,7 @@ int main(int argc, char* argv[]) {
             cout << "Se generaran grafos de " << nini << " a " << nfin << " con un salto de " << nstep << " nodos." << endl;
             cout << "Se generaran grafos con una probabilidad de percolacion de " << qini << " a " << qfin << " con un salto de " << qstep << "." << endl;
             cout << "Se realizaran " << muestras << " muestras por cada grafo." << endl;
+            cout << "Puedes editar estos parametros de forma opcional" << endl;
             cout << "El modo de generacion de grafos esta definido por [type] y el modo de percolacion por (percolation)." << endl;
         }
         else if(string(argv[1]) == "-nxn" || string(argv[1]) == "...") { // Modo de generación de grafos
