@@ -49,7 +49,7 @@ public:
         int size = n*n;
         int probability = p*100;
         for(int i = 0; i < size; i++) {
-            if (rand() % 100 > probability) g.removeVertex(i);
+            if (rand() % 100 > probability) exist[i] = false;
         }
     }
 
@@ -60,7 +60,36 @@ public:
             for(auto it = adyacencias[i].begin(); it != adyacencias[i].end(); it++) {
                 if (rand() % 100 > probability) it = adyacencias[i].erase(it);
             }
+        }
     }
-}
+
+    int calcularCC () {
+        vector<bool> visited (adyacencias.size(),false);
+        queue<int> c;
+            
+        int cc = 0;
+
+        for (int i = 0; i < adyacencias.size(); ++i) {
+
+            if (not visited[i] and exist[i]) {
+                ++cc;
+
+                c.push(i);
+
+                while (not c.empty()) {
+                    int vertex = c.front();
+                    c.pop();
+                    visited[vertex] = true;
+
+                    list<int>::iterator it = adyacencias[vertex].begin();
+                    while (it != adyacencias[vertex].end()) {
+                        if (not visited[*it] and  exist[*it]) c.push(*it);
+                        ++it;
+                    }
+                }
+            }
+        }
+        return cc;
+    }
 
 };

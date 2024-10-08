@@ -3,7 +3,7 @@
 #include <queue>
 using namespace std;
 
-int calcularCC (vector<list<int>> g) {
+int calcularCC (vector<list<int>> g, vector<bool> exist) {
     vector<bool> visited (g.size(),false);
     queue<int> c;
         
