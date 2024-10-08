@@ -62,12 +62,13 @@ public:
         int probability = p*100;
         for(int i = 0; i < size; i++) {
             for(auto it = adyacencias[i].begin(); it != adyacencias[i].end();) {
-                if (rand() % 100 > probability) {
-                    int neighbor = *it;
-                    it = adyacencias[i].erase(it);
-                    adyacencias[neighbor].erase(i);
-                } else {
-                    ++it;
+                if(*it > i) {
+                    if (rand() % 100 > probability) {
+                        int neighbor = *it;
+                        it = adyacencias[i].erase(it);
+                        adyacencias[neighbor].erase(i);
+                    } 
+                    else ++it;
                 }
             }
         }
