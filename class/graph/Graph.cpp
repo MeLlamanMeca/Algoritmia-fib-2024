@@ -3,6 +3,7 @@
 #include <set>
 #include <queue>
 #include <ciso646>
+#pragma once
 using namespace std;
 
 class Graph {
