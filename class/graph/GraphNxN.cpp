@@ -9,11 +9,11 @@ using namespace std;
 class GraphNxN : public Graph {
 
 public:
-    GraphNxN() { //Constructor por defecto
+    GraphNxN() : Graph(){ //Constructor por defecto
         GraphNxN(0);
     }
     
-    GraphNxN(int n) { //Constructor
+    GraphNxN(int n) : Graph(){ //Constructor
         this->n = n;
         exist.resize(n*n, true);
         adyacencias = vector<set<int>>(n*n);

@@ -18,22 +18,6 @@ public:
         n = 0;
     }
 
-
-    //Printea el grafo nxn para comprobar que se haya generado correctamente
-    void printGraph() const {
-        cout << "Graph with " << n << " vertices:\n";
-        for (int i = 0; i < n*n; ++i) {
-            if (exist[i]) {
-                cout << "Vertex " << i << ": ";
-                for (int neighbor : adyacencias[i]) {
-                    cout << neighbor << " ";
-                }
-                cout << endl;
-            }
-        }
-        cout << "----------------------------------------------" << endl;
-    }
-
     void nodePercolation(double p) { //percolacion de nodos
         int size = n*n;
         int probability = p*100;
@@ -87,6 +71,22 @@ public:
             }
         }
         return cc;
+    }
+
+protected:
+    //Printea el grafo nxn para comprobar que se haya generado correctamente
+    virtual void printGraph() const {
+        cout << "Graph with " << n << " vertices:\n";
+        for (int i = 0; i < n*n; ++i) {
+            if (exist[i]) {
+                cout << "Vertex " << i << ":";
+                for (int neighbor : adyacencias[i]) {
+                    cout << " " << neighbor;
+                }
+                cout << endl;
+            }
+        }
+        cout << "----------------------------------------------" << endl;
     }
 
 };
