@@ -58,16 +58,17 @@ public:
                 ++cc;
 
                 c.push(i);
+                visited[i] = true;
 
                 while (not c.empty()) {
                     int vertex = c.front();
                     c.pop();
-                    visited[vertex] = true;
 
-                    set<int>::iterator it = adyacencias[vertex].begin();
-                    while (it != adyacencias[vertex].end()) {
-                        if (not visited[*it] and  exist[*it]) c.push(*it);
-                        ++it;
+                    for (int vecino : adyacencias[vertex]) {
+                        if (not visited[vecino] and  exist[vecino]) {
+                            c.push(vecino);
+                            visited[vecino];
+                        }
                     }
                 }
             }
