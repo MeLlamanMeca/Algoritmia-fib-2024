@@ -56,13 +56,13 @@ int main(int argc, char* argv[]) {
     }
     else {
 
-        int nini = 20;
-        int nfin = 50;
-        int nstep = 10;
+        int nini = 200;
+        int nfin = 10000;
+        int nstep = 200;
         double qini = 0.0;
-        int qnum = 21;
-        double qstep = 0.05;
-        int muestras = 100;
+        int qnum = 11;
+        double qstep = 0.1;
+        int muestras = 30;
 
         if (string(argv[1]) == "-quickdev") { // Modo debug
             cout << "Modo debug activado." << endl;
@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
             for (int n = nini; n <= nfin; n += nstep) {
                 Graph g;
                 if(string(argv[1]) == "-nxn") g = GraphNxN(n);   // Generador de grano nxn base
-                if(string(argv[1]) == "-rgg") g = RandGeomGraph(n);
+                if(string(argv[1]) == "-rgg") g = RandGeomGraph(n); // Generador de grano aleatorio
                 if(string(argv[1]) == "...") //g = Graph...(n);
                 cout << endl;
                 double qq = qini;
