@@ -44,7 +44,7 @@ void debbugging() { //Función editable para debugging, no visible para el usuar
 void usage() {
     cerr << "Error: Incorrect form of usage." << endl;
     cout << "Usage: ./program_name [type] (percolation) ([N inicial] [n final] [Salto de N] [P inicial] [P final] [Salto de P] [Muestras])" << endl;
-    cout << "[type]: -info | -nxn | ... | ..." << endl;
+    cout << "[type]: -info | -nxn | -rgg | ..." << endl;
     cout << "(percolation): -node | -edge (DEFAULT) | ... | ..." << endl;
     cout << "[compulsory] (optional)" << endl;
 }
@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
     else {
 
         int nini = 20;
-        int nfin = 10000;
+        int nfin = 1000;
         int nstep = 10;
         double qini = 0.0;
         double qfin = 1.0;
@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
             cout << "Puedes editar estos parametros de forma opcional" << endl;
             cout << "El modo de generacion de grafos esta definido por [type] y el modo de percolacion por (percolation)." << endl;
         }
-        else if(string(argv[1]) == "-nxn" || string(argv[1]) == "...") { // Modo de generación de grafos
+        else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg") { // Modo de generación de grafos
             
             seed_generator();
             if(argc == 9) {
@@ -91,9 +91,8 @@ int main(int argc, char* argv[]) {
             for (int n = nini; n <= nfin; n += nstep) {
             
                 Graph g;
-                double radio = rand()/RAND_MAX;
                 if(string(argv[1]) == "-nxn") g = GraphNxN(n);   // Generador de grano nxn base
-                if(string(argv[1]) == "-rndgeom") g = RandGeomGraph(n,radio);
+                if(string(argv[1]) == "-rgg") g = RandGeomGraph(n);
                 if(string(argv[1]) == "...") //g = Graph...(n);
 
                 for (double q = qini; q <= qfin; q += qstep) {

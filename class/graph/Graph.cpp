@@ -74,8 +74,6 @@ public:
         }
         return cc;
     }
-
-protected:
     //Printea el grafo nxn para comprobar que se haya generado correctamente
     virtual void printGraph() const {
         cout << "Graph with " << n << " vertices:\n";
