@@ -33,15 +33,15 @@ public:
         //PRIMERA DUDA, como hacer la R
         if (r_param < 0) this->r = sqrt(log(n) / n); //Si no entra ninguna r la calculamos
         else this->r = r_param; // Usar el r proporcionado
-        //¿MEJOR generar n random cercana a este valor tipo, pe r = ans +=[-10,+10]?
+        //¿MEJOR generar n random cercana a este valor tipo, pe r = ans +=[-0.1,+0.1]?
         exist.resize(n*n, true);//inútil, no eliminaremos nunca vértices
         plano.resize(n);
         adyacencias = vector<set<int>>(n*n);
         //generar cordenada aleatoria plano[i] para cada nodo i
         srand(static_cast<unsigned int>(time(0))); // Semilla para números aleatorios
         for (int i = 0; i < n; ++i) {
-            double x = static_cast<double>(rand()) / RAND_MAX * 1000; // Coordenada x entre 0 y 1000
-            double y = static_cast<double>(rand()) / RAND_MAX * 1000; // Coordenada y entre 0 y 1000
+            double x = static_cast<double>(rand()) / RAND_MAX * (n-1); // Coordenada x entre 0 y n
+            double y = static_cast<double>(rand()) / RAND_MAX * (n-1); // Coordenada y entre 0 y n
             plano[i] = make_pair(x, y);
         }
         // Conectar los nodos si la distancia euclidiana entre ellos es <= r
