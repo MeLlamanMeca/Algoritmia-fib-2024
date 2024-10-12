@@ -73,7 +73,7 @@ public:
         int size = n*n;
         double p = 1.0 - q;
         for(int i = 0; i < size; i++) {
-            if (random(p)) exist[i] = false;
+            if (random(p)) removeVertex(i);
         }
     }
 
