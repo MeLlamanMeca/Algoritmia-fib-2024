@@ -72,7 +72,10 @@ public:
             }
         }
 
-        double a = adyacencias.size();
+        double a = 0.0;
+        for(bool exists : exist) {
+            if(exists) ++a;
+        }
         double b = cc;
         return b/a;
     }

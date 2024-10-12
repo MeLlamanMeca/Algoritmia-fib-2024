@@ -43,7 +43,7 @@ void debbugging() { //Función editable para debugging, no visible para el usuar
 
 void usage() {
     cerr << "Error: Incorrect form of usage." << endl;
-    cout << "Usage: ./program_name [type] (percolation) ([N inicial] [n final] [Salto de N] [P inicial] [P final] [Salto de P] [Muestras])" << endl;
+    cout << "Usage: ./program_name [type] (percolation) ([N inicial] [n final] [Salto de N] [P inicial] [Numero de saltos] [Salto de P] [Muestras])" << endl;
     cout << "[type]: -info | -nxn | -rgg | ..." << endl;
     cout << "(percolation): -node | -edge (DEFAULT) | ... | ..." << endl;
     cout << "[compulsory] (optional)" << endl;
@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
         int nfin = 50;
         int nstep = 10;
         double qini = 0.0;
-        double qfin = 1.0;
+        int qnum = 21;
         double qstep = 0.05;
         int muestras = 100;
 
@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
         }
         else if (string(argv[1]) == "-info") {
             cout << "Se generaran grafos de " << nini << " a " << nfin << " con un salto de " << nstep << " nodos." << endl;
-            cout << "Se generaran grafos con una probabilidad de percolacion de " << qini << " a " << qfin << " con un salto de " << qstep << "." << endl;
+            cout << "Se generaran grafos con una probabilidad de percolacion de " << qini << ", " << qnum << " veces con un salto de " << qstep << "." << endl;
             cout << "Se realizaran " << muestras << " muestras por cada grafo." << endl;
             cout << "Puedes editar estos parametros de forma opcional" << endl;
             cout << "El modo de generacion de grafos esta definido por [type] y el modo de percolacion por (percolation)." << endl;
@@ -83,28 +83,29 @@ int main(int argc, char* argv[]) {
                 nfin = stoi(argv[4]);
                 nstep = stoi(argv[5]);
                 qini = stod(argv[6]);
-                qfin = stod(argv[7]);
+                qnum = stoi(argv[7]);
                 qstep = stod(argv[8]);
                 muestras = stoi(argv[9]);
             }
             
             for (int n = nini; n <= nfin; n += nstep) {
-                cout << "Generando grafo de " << n << " nodos." << endl;
                 Graph g;
                 if(string(argv[1]) == "-nxn") g = GraphNxN(n);   // Generador de grano nxn base
                 if(string(argv[1]) == "-rgg") g = RandGeomGraph(n);
                 if(string(argv[1]) == "...") //g = Graph...(n);
                 cout << endl;
-                for (double q = qini; q <= qfin; q += qstep) {
+                double qq = qini;
+                for (int q = 1; q <= qnum; ++q) {
                     double media = 0.0;
                     for (int muestra = 1; muestra <= muestras; ++muestra) {
                         Graph copia = g;
-                        if(argv[2] == "-node") copia.nodePercolation(q);
-                        else copia.edgePercolation(q);
+                        if(string(argv[2]) == "-node") copia.nodePercolation(qq);
+                        else copia.edgePercolation(qq);
                         media += copia.calcularCC();
                     }
                     media /= muestras;
-                    cout << "N: " << n << " Q: " << q << " Media %CC: " << media <<endl;
+                    cout << "N: " << n << " Q: " << qq << " Media %CC: " << media <<endl;
+                    qq += qstep;
                 }
             }
             
