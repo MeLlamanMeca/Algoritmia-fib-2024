@@ -40,8 +40,9 @@ void debbugging() { //Función editable para debugging, no visible para el usuar
     GraphNxN copia = g;
     copia.edgePercolation(0.5);
     copia.printGraph();
+    cout << "NxN: edgePercolation 0:" << endl;
     GraphNxN copia2 = g;
-    copia2.edgePercolation(0.5);
+    copia2.edgePercolation(0);
     copia2.printGraph();
 
     cout << "Random: " << endl;
@@ -49,10 +50,14 @@ void debbugging() { //Función editable para debugging, no visible para el usuar
     RandGeomGraph gRandom(3);
     gRandom.printRandGeomGraph();
 
+    cout << "Random: edgePercolation 0.5:" << endl;
     RandGeomGraph copiaRandom = gRandom;
     copiaRandom.edgePercolation(0.5);
     copiaRandom.printGraph();
-
+    cout << "Random: edgePercolation 0:" << endl;
+    RandGeomGraph copiaRandom2 = gRandom;
+    copiaRandom2.edgePercolation(0);
+    copiaRandom2.printGraph();
 }
 
 void usage() {

@@ -28,9 +28,9 @@ public:
     RandGeomGraph(int n) { 
         this->n = n;
         this->r = sqrt(log(n)/n);
-        exist.resize(n*n, true);//inútil, no eliminaremos nunca vértices
+        exist.resize(n, true);//inútil, no eliminaremos nunca vértices
         plano.resize(n);
-        adjacencies = vector<set<int>>(n*n);
+        adjacencies = vector<set<int>>(n);
         //generar cordenada aleatoria plano[i] para cada nodo i
         srand(static_cast<unsigned int>(time(0))); // Semilla para números aleatorios
         for (int i = 0; i < n; ++i) {

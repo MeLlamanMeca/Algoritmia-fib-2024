@@ -48,16 +48,18 @@ public:
         }
     }
 
-    bool removeEdge(int u, int v) {
-        if(adjacencies[u].find(v) != adjacencies[u].end()) {
-            adjacencies[u].erase(v);
-            return true;
+    set<int>::iterator removeEdge(int u, int v) {
+        auto it_u = adjacencies[u].find(v);
+        if(it_u != adjacencies[u].end()) {
+            return adjacencies[u].erase(it_u);
         }
-        if (adjacencies[v].find(u) != adjacencies[u].end()) {
-            adjacencies[v].erase(u);
-            return true;
+
+        auto it_v = adjacencies[v].find(u);
+        if(it_v != adjacencies[v].end()) {
+            return adjacencies[v].erase(it_v);
         }
-        return false;
+
+        return adjacencies[u].end();
     }
 
     bool removeVertex(int vertex) {
@@ -70,23 +72,18 @@ public:
 
     // Percolacion de nodos
     void nodePercolation(double q) {
-        int size = n*n;
         double p = 1.0 - q;
-        for(int i = 0; i < size; i++) {
+        for(int i = 0; i < n; i++) {
             if (random(p)) removeVertex(i);
         }
     }
 
     // Percolacion de aristas, verificar que esta función está bien despues de algunos cambios ---------------------------------------------------------------------
     void edgePercolation(double q) {
-        int size = n*n;
         double p = 1.0 - q;
-        for(int i = 0; i < size; i++) {
+        for(int i = 0; i < n; i++) {
             for(auto it = adjacencies[i].begin(); it != adjacencies[i].end();) {
-                if(*it > i) {
-                    if (random(p)) removeEdge(i, *it);
-                    else ++it;
-                }
+                if (random(p)) it = removeEdge(i, *it);
                 else ++it;
             }
         }
