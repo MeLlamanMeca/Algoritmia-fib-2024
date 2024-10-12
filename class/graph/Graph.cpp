@@ -77,18 +77,14 @@ public:
         }
     }
 
-    // Percolacion de aristas
+    // Percolacion de aristas, verificar que esta función está bien despues de algunos cambios ---------------------------------------------------------------------
     void edgePercolation(double q) {
         int size = n*n;
         double p = 1.0 - q;
         for(int i = 0; i < size; i++) {
             for(auto it = adjacencies[i].begin(); it != adjacencies[i].end();) {
                 if(*it > i) {
-                    if (random(p)) {
-                        int neighbor = *it;
-                        it = adjacencies[i].erase(it);
-                        adjacencies[neighbor].erase(i);
-                    } 
+                    if (random(p)) removeEdge(i, *it);
                     else ++it;
                 }
                 else ++it;
@@ -136,20 +132,5 @@ public:
         cout << "----------------------------------------------" << endl;
     }
 
-
-
-
-
-    // Funciones sin usar, rarillas
-    set<int> getAdjacencies(int vertex) {
-        
-        set<int> filteredAdjacencies;
-        for (int conn : adjacencies[vertex]) {
-            if (exist[conn]) {
-                filteredAdjacencies.insert(conn);
-            }
-        }
-        return filteredAdjacencies;
-    }
 
 };
