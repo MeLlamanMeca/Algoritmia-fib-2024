@@ -23,7 +23,7 @@ public:
     void nodePercolation(double p) { //percolacion de nodos
         int probability = p*100;
         for(int i = 0; i < n; i++) {
-            if (rand() % 100 > probability) exist[i] = false;
+            if (rand() % 100 >= probability) exist[i] = false;
         }
     }
 
@@ -32,7 +32,7 @@ public:
         for(int i = 0; i < n; i++) {
             for(auto it = adyacencias[i].begin(); it != adyacencias[i].end();) {
                 if(*it > i) {
-                    if (rand() % 100 > probability) {
+                    if (rand() % 100 >= probability) {
                         int neighbor = *it;
                         it = adyacencias[i].erase(it);
                         adyacencias[neighbor].erase(i);
