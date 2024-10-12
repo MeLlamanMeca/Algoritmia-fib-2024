@@ -2,6 +2,7 @@
 #include <ciso646>
 #include <limits>
 #include <string>
+#include "class/graph/Graph.cpp"
 #include "class/graph/GraphNxN.cpp"
 #include "class/graph/RandomGeometricGraph.cpp"
 using namespace std;
@@ -39,6 +40,16 @@ void debbugging() { //Función editable para debugging, no visible para el usuar
     GraphNxN copia2 = g;
     copia2.edgePercolation(0.5);
     copia2.printGraph();
+
+
+    //Debugging RandomGeomGraph
+    RandGeomGraph gRandom(3);
+    gRandom.printRandGeomGraph();
+
+    RandGeomGraph copiaRandom = gRandom;
+    copiaRandom.edgePercolation(0.5);
+    copiaRandom.printGraph();
+
 }
 
 void usage() {
@@ -93,7 +104,7 @@ int main(int argc, char* argv[]) {
                 Graph g;
                 double radio = rand()/RAND_MAX;
                 if(string(argv[1]) == "-nxn") g = GraphNxN(n);   // Generador de grano nxn base
-                if(string(argv[1]) == "-rndgeom") g = RandGeomGraph(n,radio);
+                if(string(argv[1]) == "-rndgeom") g = RandGeomGraph(n);
                 if(string(argv[1]) == "...") //g = Graph...(n);
 
                 for (double q = qini; q <= qfin; q += qstep) {
