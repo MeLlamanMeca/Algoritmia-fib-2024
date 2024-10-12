@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
                 qstep = stod(argv[8]);
                 muestras = stoi(argv[9]);
             }
-
+            
             for (int n = nini; n <= nfin; n += nstep) {
                 cout << "Generando grafo de " << n << " nodos." << endl;
                 Graph g;
@@ -101,13 +101,13 @@ int main(int argc, char* argv[]) {
                         Graph copia = g;
                         if(argv[2] == "-node") copia.nodePercolation(q);
                         else copia.edgePercolation(q);
-                        int cc = copia.calcularCC();
-                        media += cc;
+                        media += copia.calcularCC();
                     }
                     media /= muestras;
-                    cout << "N: " << n << " Q: " << q << " Media: " << media << " Media %CC: " << media/n <<endl;
+                    cout << "N: " << n << " Q: " << q << " Media %CC: " << media <<endl;
                 }
             }
+            
         }
         else {
             usage();

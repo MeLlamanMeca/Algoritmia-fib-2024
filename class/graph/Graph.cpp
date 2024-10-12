@@ -21,17 +21,15 @@ public:
     }
 
     void nodePercolation(double p) { //percolacion de nodos
-        int size = n*n;
         int probability = p*100;
-        for(int i = 0; i < size; i++) {
+        for(int i = 0; i < n; i++) {
             if (rand() % 100 > probability) exist[i] = false;
         }
     }
 
     void edgePercolation(double p) { //percolacion de aristas
-        int size = n*n;
         int probability = p*100;
-        for(int i = 0; i < size; i++) {
+        for(int i = 0; i < n; i++) {
             for(auto it = adyacencias[i].begin(); it != adyacencias[i].end();) {
                 if(*it > i) {
                     if (rand() % 100 > probability) {
@@ -46,7 +44,7 @@ public:
         }
     }
 
-    int calcularCC () {
+    double calcularCC () {
         vector<bool> visited (adyacencias.size(),false);
         queue<int> c;
             
@@ -67,18 +65,21 @@ public:
                     for (int vecino : adyacencias[vertex]) {
                         if (not visited[vecino] and  exist[vecino]) {
                             c.push(vecino);
-                            visited[vecino];
+                            visited[vecino] = true;
                         }
                     }
                 }
             }
         }
-        return cc;
+
+        double a = adyacencias.size();
+        double b = cc;
+        return b/a;
     }
     //Printea el grafo nxn para comprobar que se haya generado correctamente
     virtual void printGraph() const {
         cout << "Graph with " << n << " vertices:\n";
-        for (int i = 0; i < n*n; ++i) {
+        for (int i = 0; i < n; ++i) {
             if (exist[i]) {
                 cout << "Vertex " << i << ":";
                 for (int neighbor : adyacencias[i]) {
