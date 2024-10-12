@@ -31,9 +31,12 @@ void seed_generator() { //Seleccionar semilla para variar la generación de graf
 }
 
 void debbugging() { //Función editable para debugging, no visible para el usuario final.
+    cout << "NxN: " << endl;
     //Debugging
     GraphNxN g(3);
     g.printGraph();
+
+    cout << "NxN: edgePercolation 0.5:" << endl;
     GraphNxN copia = g;
     copia.edgePercolation(0.5);
     copia.printGraph();
@@ -41,7 +44,7 @@ void debbugging() { //Función editable para debugging, no visible para el usuar
     copia2.edgePercolation(0.5);
     copia2.printGraph();
 
-
+    cout << "Random: " << endl;
     //Debugging RandomGeomGraph
     RandGeomGraph gRandom(3);
     gRandom.printRandGeomGraph();

@@ -120,7 +120,7 @@ public:
     // Printea el grafo nxn para comprobar que se haya generado correctamente
     void printGraph() const {
         cout << "Graph with " << n << " vertices:\n";
-        for (int i = 0; i < n*n; ++i) {
+        for (int i = 0; i < n; ++i) {
             if (exist[i]) {
                 cout << "Vertex " << i << ":";
                 for (int neighbor : adjacencies[i]) {
