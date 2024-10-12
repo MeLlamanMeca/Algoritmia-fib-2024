@@ -27,9 +27,9 @@ class Graph {
         cout << "Graph with " << n << " vertices and probability " << probability << ":\n";
         for (int i = 0; i < n; ++i) {
             if (exist[i]) {
-                cout << "Vertex " << i << ": ";
+                cout << "Vertex " << i << ":";
                 for (int neighbor : connections[i]) {
-                    cout << neighbor << " ";
+                    cout << " " << neighbor;
                 }
                 cout << endl;
             }
@@ -119,7 +119,7 @@ Graph leer_grafo() {
     double p;
     cout << "Introduce el numero de nodos de tu grafo:" << endl;
     cin >> n;
-    cout << "Introduce la probabilidad de tu grafo:" << endl;
+    cout << "Introduce la probabilidad de tu grafo:" << endl;//probabilidad de tener cada 
     cin >> p;
     Graph g(n,p);
     for(int i = 0; i < n; i++) {
@@ -137,6 +137,26 @@ Graph leer_grafo() {
     return g;
 }
 
+void escoger_Percolacion(Graph& g) {//creo que no tiene mucho sentido (Nil 2024)
+    int n;
+    cout << "Introduce que tipo de percolacion quieres hacer:" << endl;
+    cout << "- Percolacion por nodos (1)" << endl;
+    cout << "- Percolacion por aristas (2)" << endl;
+    cin >> n;
+    bool error = false;
+    do { 
+        if (n == 1) {nodePercolation(g); error = false;}
+        else if (n == 2) {edgePercolation(g); error = false;}
+        else {
+            error = true;
+            cout << "Debes introducir un entero indicando la percolacion" << endl;
+            cout << "- Percolacion por nodos (1)" << endl;
+            cout << "- Percolacion por aristas (2)" << endl;
+            cin >> n;
+        }
+    } while(error);
+}
+
 int main() {
     char x;
     Graph g = leer_grafo();
@@ -144,8 +164,7 @@ int main() {
     int pi = -1;
     int pf = -1;
     int ps = -1;
-    
-    nodePercolation(g);
+    escoger_Percolacion(g);
     g.transformToUndirected();
     g.printGraph();
 }
