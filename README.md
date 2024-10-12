@@ -1,1 +1,1 @@
-# Algoritmia Percolation Conn threshold
+# Percolation Conn threshold
