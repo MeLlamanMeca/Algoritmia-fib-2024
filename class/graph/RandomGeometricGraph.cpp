@@ -51,7 +51,7 @@ public:
         return sqrt(pow(p1.first - p2.first, 2) + pow(p1.second - p2.second, 2));
     }
     // Función para imprimir el grafo con el radio y los puntos de cada vértice, 
-    void printRandGeomGraph() const { // Forma alternativa a printGraph, aunque printGraph funciona igualmente
+    void printGraph() const { // Forma alternativa a printGraph, aunque printGraph funciona igualmente
         cout << "Grafo con " << n << " vertices y radio = " << r << "):\n";
         for (int i = 0; i < n; ++i) {
             if (exist[i]) {

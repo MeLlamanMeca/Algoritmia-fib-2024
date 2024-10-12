@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
     else {
 
         int nini = 20;
-        int nfin = 1000;
+        int nfin = 50;
         int nstep = 10;
         double qini = 0.0;
         double qfin = 1.0;
@@ -89,19 +89,23 @@ int main(int argc, char* argv[]) {
             }
 
             for (int n = nini; n <= nfin; n += nstep) {
-            
+                cout << "Generando grafo de " << n << " nodos." << endl;
                 Graph g;
                 if(string(argv[1]) == "-nxn") g = GraphNxN(n);   // Generador de grano nxn base
                 if(string(argv[1]) == "-rgg") g = RandGeomGraph(n);
                 if(string(argv[1]) == "...") //g = Graph...(n);
-
+                cout << endl;
                 for (double q = qini; q <= qfin; q += qstep) {
+                    double media = 0.0;
                     for (int muestra = 1; muestra <= muestras; ++muestra) {
                         Graph copia = g;
                         if(argv[2] == "-node") copia.nodePercolation(q);
                         else copia.edgePercolation(q);
-                        //AÑADIR PRINT DE LOS RESULTADOS g.PrintResults);
+                        int cc = copia.calcularCC();
+                        media += cc;
                     }
+                    media /= muestras;
+                    cout << "N: " << n << " Q: " << q << " Media: " << media << " Media %CC: " << media/n <<endl;
                 }
             }
         }
