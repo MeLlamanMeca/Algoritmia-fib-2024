@@ -15,6 +15,12 @@ class RandGeomGraph : public Graph {//solo haremos edgePercolation()
 private:
     double r; 
     vector<pair<double,double>> plano;//indica coordenadas ∈ [0,1) de cada nodo i  
+    
+    // distancia(x1, y1) y (x2, y2) = sqrt((x1-x2)^2+(y1-y2)^2)
+    double distancia(const pair<double, double>& p1, const pair<double, double>& p2) const {
+        return sqrt(pow(p1.first - p2.first, 2) + pow(p1.second - p2.second, 2));
+    }
+
 public:
     RandGeomGraph(){ //Constructor por defecto
         RandGeomGraph(0);
@@ -23,9 +29,9 @@ public:
     RandGeomGraph(int n) { 
         this->n = n;
         this->r = sqrt(log(n)/n);
-        exist.resize(n*n, true);//inútil, no eliminaremos nunca vértices
+        exist.resize(n, true);
         plano.resize(n);
-        adyacencias = vector<set<int>>(n*n);
+        adyacencias = vector<set<int>>(n);
         //generar cordenada aleatoria plano[i] para cada nodo i
         srand(static_cast<unsigned int>(time(0))); // Semilla para números aleatorios
         for (int i = 0; i < n; ++i) {
@@ -46,13 +52,9 @@ public:
         }
     }
 
-    // distancia(x1, y1) y (x2, y2) = sqrt((x1-x2)^2+(y1-y2)^2)
-    double distancia(const pair<double, double>& p1, const pair<double, double>& p2) const {
-        return sqrt(pow(p1.first - p2.first, 2) + pow(p1.second - p2.second, 2));
-    }
-    // Función para imprimir el grafo con el radio y los puntos de cada vértice, 
+    // Función TEMPORAL para imprimir el grafo con el radio y los puntos de cada vértice, 
     void printGraph() const { // Forma alternativa a printGraph, aunque printGraph funciona igualmente
-        cout << "Grafo con " << n << " vertices y radio = " << r << "):\n";
+        cout << "Grafo con " << n << " vertices y radio = " << r << ":\n";
         for (int i = 0; i < n; ++i) {
             if (exist[i]) {
                 cout << "Vertex " << i << " (" << plano[i].first << ", " << plano[i].second << "):";
