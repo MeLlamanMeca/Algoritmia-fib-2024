@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
             
             for (int n = nini; n <= nfin; n += nstep) {
                 Graph g;
-                if(string(argv[1]) == "-nxn") g = GraphNxN(n);   // Generador de grano nxn base
+                if(string(argv[1]) == "-nxn") g = GraphNxN(sqrt(n));   // Generador de grano nxn base
                 if(string(argv[1]) == "-rgg") g = RandGeomGraph(n); // Generador de grano aleatorio
                 if(string(argv[1]) == "...") //g = Graph...(n);
                 cout << endl;
