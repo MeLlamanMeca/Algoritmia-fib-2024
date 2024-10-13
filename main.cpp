@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
             cout << "Puedes editar estos parametros de forma opcional" << endl;
             cout << "El modo de generacion de grafos esta definido por [type] y el modo de percolacion por (percolation)." << endl;
         }
-        else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg" || string(argv[1]) == "-kmp ") { // Modo de generación de grafos
+        else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg" || string(argv[1]) == "-kmp") { // Modo de generación de grafos
             
             seed_generator();
             if(argc == 9) {
