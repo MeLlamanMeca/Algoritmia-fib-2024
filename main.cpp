@@ -73,7 +73,7 @@ int main(int argc, char* argv[]) {
             cout << "Puedes editar estos parametros de forma opcional" << endl;
             cout << "El modo de generacion de grafos esta definido por [type] y el modo de percolacion por (percolation)." << endl;
         }
-        else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg") { // Modo de generación de grafos
+        else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg" || string(argv[1]) == "-kmp ") { // Modo de generación de grafos
             
             seed_generator();
             if(argc == 9) {
@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
                 if(string(argv[1]) == "-nxn") g = GraphNxN(sqrt(n));    // Generador de grafo nxn base
                 if(string(argv[1]) == "-rgg") g = RandGeomGraph(n);     // Generador de grafo aleatorio
                 if(string(argv[1]) == "-kmp") g = GraphKomp(n);         // Generador de grafo completo
-                cout << endl;
+
                 double qq = qini;
                 for (int q = 1; q <= qnum; ++q) {
                     double media = 0.0;
@@ -102,10 +102,14 @@ int main(int argc, char* argv[]) {
                         media += copia.calcularCC();
                     }
                     media /= muestras;
-                    if(string(argv[1]) == "-nxn") cout << "N: " << sqrt(n)*sqrt(n) << " Q: " << qq << " Media %CC: " << media <<endl;
+                    if(string(argv[1]) == "-nxn") {
+                        int num = sqrt(n);
+                        cout << "N: " << num*num << " Q: " << qq << " Media %CC: " << media <<endl;
+                    }
                     else cout << "N: " << n << " Q: " << qq << " Media %CC: " << media <<endl;
                     qq += qstep;
                 }
+                
             }
             
         }
