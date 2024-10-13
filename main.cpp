@@ -104,7 +104,8 @@ int main(int argc, char* argv[]) {
                         media += copia.calcularCC();
                     }
                     media /= muestras;
-                    cout << "N: " << n << " Q: " << qq << " Media %CC: " << media <<endl;
+                    if(string(argv[1]) == "-nxn") cout << "N: " << sqrt(n)*2 << " Q: " << qq << " Media %CC: " << media <<endl;
+                    else cout << "N: " << n << " Q: " << qq << " Media %CC: " << media <<endl;
                     qq += qstep;
                 }
             }
