@@ -1,4 +1,3 @@
-Introduzca una semilla: 
 N: 105 Q: 0 Media %CC: nan
 N: 105 Q: 0.1 Media %CC: 0.761045
 N: 105 Q: 0.2 Media %CC: 0.540257
