@@ -4,7 +4,7 @@
 #include <string>
 #include "class/graph/GraphNxN.cpp"
 #include "class/graph/RandomGeometricGraph.cpp"
-#include "class/graph/GraphKomplete.cpp"
+#include "class/graph/GraphTriangular.cpp"
 using namespace std;
 
 /*  
@@ -32,9 +32,7 @@ void seed_generator() { //Seleccionar semilla para variar la generación de graf
 
 void debbugging() { //Función editable para debugging, no visible para el usuario final.
     //Debugging
-    GraphKomp g5(5);
-    g5.printGraph();
-    g5.edgePercolation(0.5);
+    GraphTrg g5(4);
     g5.printGraph();
 }
 
@@ -73,7 +71,7 @@ int main(int argc, char* argv[]) {
             cout << "Puedes editar estos parametros de forma opcional" << endl;
             cout << "El modo de generacion de grafos esta definido por [type] y el modo de percolacion por (percolation)." << endl;
         }
-        else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg") { // Modo de generación de grafos
+        else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg" || string(argv[1]) == "-trg") { // Modo de generación de grafos
             
             seed_generator();
             if(argc == 9) {
@@ -90,8 +88,8 @@ int main(int argc, char* argv[]) {
                 Graph g;
                 if(string(argv[1]) == "-nxn") g = GraphNxN(sqrt(n));    // Generador de grafo nxn base
                 if(string(argv[1]) == "-rgg") g = RandGeomGraph(n);     // Generador de grafo aleatorio
-                if(string(argv[1]) == "-kmp") g = GraphKomp(n);         // Generador de grafo completo
-                cout << endl;
+                if(string(argv[1]) == "-trg") g = GraphTrg(sqrt(n));    // Generador de grafo completo
+
                 double qq = qini;
                 for (int q = 1; q <= qnum; ++q) {
                     double media = 0.0;
@@ -102,10 +100,21 @@ int main(int argc, char* argv[]) {
                         media += copia.calcularCC();
                     }
                     media /= muestras;
-                    if(string(argv[1]) == "-nxn") cout << "N: " << sqrt(n)*sqrt(n) << " Q: " << qq << " Media %CC: " << media <<endl;
+
+                    //Printear
+                    if(string(argv[1]) == "-nxn") {
+                        int num = sqrt(n);
+                        cout << "N: " << num*num << " Q: " << qq << " Media %CC: " << media <<endl;
+                    }
+                    else if (string(argv[1]) == "-trg") {
+                        int num = sqrt(n);
+                        num = (num*(num+1))/2;
+                        cout << "N: " << num << " Q: " << qq << " Media %CC: " << media <<endl;
+                    }
                     else cout << "N: " << n << " Q: " << qq << " Media %CC: " << media <<endl;
                     qq += qstep;
                 }
+                
             }
             
         }
