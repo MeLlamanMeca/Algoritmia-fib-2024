@@ -44,17 +44,17 @@ public:
 
     GraphNxNnodePercol(int n, double probability) : GraphNxN(n) {
         double p = probability*100;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < this->n; ++i) {
             if (rand() % 100 >= p) exist[i] = false;
         }
     }
 };
 
-class GraphNxNvertexPercol : public GraphNxN {
+class GraphNxNedgePercol : public GraphNxN {
 public:
-    GraphNxNvertexPercol() : GraphNxN() {}
+    GraphNxNedgePercol() : GraphNxN() {}
 
-    GraphNxNvertexPercol(int n, double probability) {
+    GraphNxNedgePercol(int n, double probability) {
         double p = probability*100;
         this->n = n*n;
         exist.resize(n*n, true);

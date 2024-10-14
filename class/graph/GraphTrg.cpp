@@ -48,17 +48,17 @@ public:
 
     GraphTrgnodePercol(int n, double probability) : GraphTrg(n) {
         double p = probability*100;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < this->n; ++i) {
             if (rand() % 100 >= p) exist[i] = false;
         }
     }
 };
 
-class GraphTrgvertexPercol : public GraphTrg {
+class GraphTrgedgePercol : public GraphTrg {
 public:
-    GraphTrgvertexPercol() : GraphTrg() {}
+    GraphTrgedgePercol() : GraphTrg() {}
     
-    GraphTrgvertexPercol(int n, double probability) {
+    GraphTrgedgePercol(int n, double probability) {
         this->n = (n*(n+1))/2;
         exist.resize(this->n, true);
         adyacencias = vector<set<int>>(this->n);

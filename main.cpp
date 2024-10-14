@@ -32,7 +32,7 @@ void seed_generator() { //Seleccionar semilla para variar la generación de graf
 
 void debbugging() { //Función editable para debugging, no visible para el usuario final.
     //Debugging
-    GraphNxNnodePercol g5(3,50);
+    RandGeomGraphedgePercol g5(10,0.5);
     g5.printGraph();
 }
 
@@ -93,15 +93,15 @@ int main(int argc, char* argv[]) {
                         Graph g;
                         if(string(argv[1]) == "-nxn") { // Generador de grafo nxn base
                             if(string(argv[2]) == "-node") g = GraphNxNnodePercol(n, qq);
-                            else if(string(argv[2]) == "-edge") g = GraphNxNvertexPercol(n, qq);  
+                            else if(string(argv[2]) == "-edge") g = GraphNxNedgePercol(n, qq);  
                         }
                         else if(string(argv[1]) == "-rgg") { // Generador de grafo aleatorio
                             if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, qq);
-                            else if(string(argv[2]) == "-edge")  g = RandGeomGraphvertexPercol(n, qq);  
+                            else if(string(argv[2]) == "-edge")  g = RandGeomGraphedgePercol(n, qq);  
                         }
                         else if(string(argv[1]) == "-trg") { // Generador de grafo completo
                             if(string(argv[2]) == "-node") g = GraphTrgnodePercol(n, qq);
-                            else if(string(argv[2]) == "-edge")  g = GraphTrgvertexPercol(n, qq);
+                            else if(string(argv[2]) == "-edge")  g = GraphTrgedgePercol(n, qq);
                         }  
                         media += g.calcularCC();
                     }

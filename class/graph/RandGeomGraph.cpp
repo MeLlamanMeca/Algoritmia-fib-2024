@@ -6,8 +6,10 @@
 #include <queue>
 #include <cmath>
 #include <cstdlib> // Para rand() y srand()
-#include <ctime>   // Para time()
 #include "Graph.cpp"
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 using namespace std;
 
 class RandGeomGraph : public Graph {//solo haremos edgePercolation()
@@ -30,15 +32,16 @@ public:
     
     RandGeomGraph(int n) { 
         this->n = n;
-        this->r = sqrt(log(n)/n);
+        this->r = sqrt(log(n)/(M_PI*n));
         exist.resize(n, true);
         plano.resize(n);
         adyacencias = vector<set<int>>(n);
         //generar cordenada aleatoria plano[i] para cada nodo i
-        srand(static_cast<unsigned int>(time(0))); // Semilla para números aleatorios
         for (int i = 0; i < n; ++i) {
-            double x = static_cast<double>(rand()) / RAND_MAX; // Coordenada x entre 0 y 1
-            double y = static_cast<double>(rand()) / RAND_MAX; // Coordenada y entre 0 y 1
+            double x = rand(); // Coordenada x entre 0 y 1
+            x /= RAND_MAX;
+            double y = rand(); // Coordenada y entre 0 y 1
+            y /= RAND_MAX;
             plano[i] = make_pair(x, y);
         }
         // Conectar los nodos si la distancia euclidiana entre ellos es <= r
@@ -77,29 +80,30 @@ public:
 
     RandGeomGraphnodePercol(int n, double probability) : RandGeomGraph(n) {
         double p = probability*100;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < this->n; ++i) {
             if (rand() % 100 >= p) exist[i] = false;
         }
     }
 };
 
-class RandGeomGraphvertexPercol : public RandGeomGraph {
+class RandGeomGraphedgePercol : public RandGeomGraph {
 public:
 
-    RandGeomGraphvertexPercol() : RandGeomGraph() {}
+    RandGeomGraphedgePercol() : RandGeomGraph() {}
 
-    RandGeomGraphvertexPercol(int n, double probability) { 
+    RandGeomGraphedgePercol(int n, double probability) { 
         double p = probability*100;
         this->n = n;
-        this->r = sqrt(log(n)/n);
+        this->r = sqrt(log(n)/(M_PI*n));
         exist.resize(n, true);
         plano.resize(n);
         adyacencias = vector<set<int>>(n);
         //generar cordenada aleatoria plano[i] para cada nodo i
-        srand(static_cast<unsigned int>(time(0))); // Semilla para números aleatorios
         for (int i = 0; i < n; ++i) {
-            double x = static_cast<double>(rand()) / RAND_MAX; // Coordenada x entre 0 y 1
-            double y = static_cast<double>(rand()) / RAND_MAX; // Coordenada y entre 0 y 1
+            double x = rand(); // Coordenada x entre 0 y 1
+            x /= RAND_MAX;
+            double y = rand(); // Coordenada y entre 0 y 1
+            y /= RAND_MAX;
             plano[i] = make_pair(x, y);
         }
         // Conectar los nodos si la distancia euclidiana entre ellos es <= r
