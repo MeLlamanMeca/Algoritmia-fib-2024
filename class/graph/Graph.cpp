@@ -79,7 +79,7 @@ public:
         double b = cc;
         return b/a;
     }
-    //Printea el grafo nxn para comprobar que se haya generado correctamente
+    
     virtual void printGraph() const {
         cout << "Graph with " << n << " vertices:\n";
         for (int i = 0; i < n; ++i) {

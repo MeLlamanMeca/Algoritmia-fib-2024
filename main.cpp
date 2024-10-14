@@ -3,8 +3,8 @@
 #include <limits>
 #include <string>
 #include "class/graph/GraphNxN.cpp"
-#include "class/graph/RandomGeometricGraph.cpp"
-#include "class/graph/GraphTriangular.cpp"
+#include "class/graph/GraphTrg.cpp"
+#include "class/graph/RandGeomGraph.cpp"
 using namespace std;
 
 /*  
@@ -32,7 +32,7 @@ void seed_generator() { //Seleccionar semilla para variar la generación de graf
 
 void debbugging() { //Función editable para debugging, no visible para el usuario final.
     //Debugging
-    GraphTrg g5(4);
+    GraphNxN g5(3);
     g5.printGraph();
 }
 
@@ -85,19 +85,25 @@ int main(int argc, char* argv[]) {
             }
             
             for (int n = nini; n <= nfin; n += nstep) {
-                Graph g;
-                if(string(argv[1]) == "-nxn") g = GraphNxN(sqrt(n));    // Generador de grafo nxn base
-                if(string(argv[1]) == "-rgg") g = RandGeomGraph(n);     // Generador de grafo aleatorio
-                if(string(argv[1]) == "-trg") g = GraphTrg(sqrt(n));    // Generador de grafo completo
 
                 double qq = qini;
                 for (int q = 1; q <= qnum; ++q) {
                     double media = 0.0;
                     for (int muestra = 1; muestra <= muestras; ++muestra) {
-                        Graph copia = g;
-                        if(string(argv[2]) == "-node") copia.nodePercolation(qq);
-                        else copia.edgePercolation(qq);
-                        media += copia.calcularCC();
+                        Graph g;
+                        if(string(argv[1]) == "-nxn") { // Generador de grafo nxn base
+                            if(string(argv[2]) == "-node") g = GraphNxNnodePercol(n, qq);
+                            else if(string(argv[2]) == "-vertex") g = GraphNxNvertexPercol(n, qq);  
+                        }
+                        else if(string(argv[1]) == "-rgg") { // Generador de grafo aleatorio
+                             if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, qq);
+                            else if(string(argv[2]) == "-vertex")  g = RandGeomGraphvertexPercol(n, qq);  
+                        }
+                        else if(string(argv[1]) == "-trg") { // Generador de grafo completo
+                            if(string(argv[2]) == "-node") g = GraphTrgnodePercol(n, qq);
+                            else if(string(argv[2]) == "-vertex")  g = GraphTrgvertexPercol(n, qq);
+                        }  
+                        media += g.calcularCC();
                     }
                     media /= muestras;
 
