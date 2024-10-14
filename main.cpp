@@ -9,7 +9,7 @@ using namespace std;
 
 /*  
     Este main se encarga de procesar y generar todos los grafos 
-    almacenando sus datos para su posterior analisis 
+    imprimiendo sus datos para su posterior analisis 
 */
 
 void seed_generator() { //Seleccionar semilla para variar la generación de grafos aleatorios y a la vez permitir recuperar resultados.
