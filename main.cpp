@@ -92,16 +92,16 @@ int main(int argc, char* argv[]) {
                     for (int muestra = 1; muestra <= muestras; ++muestra) {
                         Graph g;
                         if(string(argv[1]) == "-nxn") { // Generador de grafo nxn base
-                            if(string(argv[2]) == "-node") g = GraphNxNnodePercol(n, qq);
-                            else if(string(argv[2]) == "-edge") g = GraphNxNedgePercol(n, qq);  
+                            if(string(argv[2]) == "-node") g = GraphNxNnodePercol(sqrt(n), qq);
+                            else if(string(argv[2]) == "-edge") g = GraphNxNedgePercol(sqrt(n), qq);  
                         }
                         else if(string(argv[1]) == "-rgg") { // Generador de grafo aleatorio
                             if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, qq);
                             else if(string(argv[2]) == "-edge")  g = RandGeomGraphedgePercol(n, qq);  
                         }
-                        else if(string(argv[1]) == "-trg") { // Generador de grafo completo
-                            if(string(argv[2]) == "-node") g = GraphTrgnodePercol(n, qq);
-                            else if(string(argv[2]) == "-edge")  g = GraphTrgedgePercol(n, qq);
+                        else if(string(argv[1]) == "-trg") { // Generador de grafo triangular
+                            if(string(argv[2]) == "-node") g = GraphTrgnodePercol(sqrt(n), qq);
+                            else if(string(argv[2]) == "-edge")  g = GraphTrgedgePercol(sqrt(n), qq);
                         }  
                         media += g.calcularCC();
                     }
