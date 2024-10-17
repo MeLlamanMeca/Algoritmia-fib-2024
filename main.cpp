@@ -32,7 +32,11 @@ void seed_generator() { //Seleccionar semilla para variar la generación de graf
 
 void debbugging() { //Función editable para debugging, no visible para el usuario final.
     //Debugging
-    RandGeomGraphedgePercol g5(10,0.5);
+    RandGeomGraph g5 = RandGeomGraph(10);
+    cout << "Sin percolar" << endl;
+    g5.printGraph();
+    g5.edgePercolation(0.5);
+    cout << "Percolado con q = 0.5" << endl;
     g5.printGraph();
 }
 
@@ -96,8 +100,12 @@ int main(int argc, char* argv[]) {
                             else if(string(argv[2]) == "-edge") g = GraphNxNedgePercol(sqrt(n), qq);  
                         }
                         else if(string(argv[1]) == "-rgg") { // Generador de grafo aleatorio
-                            if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, qq);
-                            else if(string(argv[2]) == "-edge")  g = RandGeomGraphedgePercol(n, qq);  
+                            if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, qq);//no lo hacemos nunca
+                            else if(string(argv[2]) == "-edge")  {
+                                //tiene que tener 1cc, la creadora lo asegura
+                                g = RandGeomGraph(n);  
+                                g.edgePercolation(qq);
+                            }
                         }
                         else if(string(argv[1]) == "-trg") { // Generador de grafo triangular
                             if(string(argv[2]) == "-node") g = GraphTrgnodePercol(sqrt(n), qq);

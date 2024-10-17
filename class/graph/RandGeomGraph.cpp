@@ -30,32 +30,67 @@ public:
         RandGeomGraph(0);
     }
     
-    RandGeomGraph(int n) { 
+    RandGeomGraph(int n) { //genera RGG con solo 1CC
         this->n = n;
         this->r = sqrt(log(n)/(M_PI*n));
-        exist.resize(n, true);
-        plano.resize(n);
-        adyacencias = vector<set<int>>(n);
-        //generar cordenada aleatoria plano[i] para cada nodo i
-        for (int i = 0; i < n; ++i) {
-            double x = rand(); // Coordenada x entre 0 y 1
-            x /= RAND_MAX;
-            double y = rand(); // Coordenada y entre 0 y 1
-            y /= RAND_MAX;
-            plano[i] = make_pair(x, y);
-        }
-        // Conectar los nodos si la distancia euclidiana entre ellos es <= r
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                if (j != i) {
-                    if (distancia(plano[i], plano[j]) <= r) {
-                        adyacencias[i].insert(j);
-                        adyacencias[j].insert(i);
+        do{
+            exist.resize(n, true);
+            plano.resize(n);
+            adyacencias = vector<set<int>>(n);
+            //generar cordenada aleatoria plano[i] para cada nodo i
+            for (int i = 0; i < n; ++i) {
+                double x = rand(); // Coordenada x entre 0 y 1
+                x /= RAND_MAX;
+                double y = rand(); // Coordenada y entre 0 y 1
+                y /= RAND_MAX;
+                plano[i] = make_pair(x, y);
+            }
+            // Conectar los nodos si la distancia euclidiana entre ellos es <= r
+            for (int i = 0; i < n; ++i) {
+                for (int j = 0; j < n; ++j) {
+                    if (j != i) {
+                        if (distancia(plano[i], plano[j]) <= r) {
+                            adyacencias[i].insert(j);
+                            adyacencias[j].insert(i);
+                        }
+                    }
+                }
+            }
+        } while(masde1CC());
+    }
+    bool masde1CC() {
+        vector<bool> visited(adyacencias.size(), false);
+        queue<int> c;
+        
+        int cc = 0;
+
+        for (int i = 0; i < adyacencias.size(); ++i) {
+            if (!visited[i] && exist[i]) {
+                ++cc;
+
+                if (cc > 1) return true;
+
+                c.push(i);
+                visited[i] = true;
+
+                while (!c.empty()) {
+                    int vertex = c.front();
+                    c.pop();
+
+                    for (int vecino : adyacencias[vertex]) {
+                        if (not visited[vecino] and exist[vecino]) {
+                            c.push(vecino);
+                            visited[vecino] = true;
+                        }
                     }
                 }
             }
         }
+        
+        return false; // Si solo hay 1 o 0 CC, devolvemos false
     }
+
+    
 
     // Función TEMPORAL para imprimir el grafo con el radio y los puntos de cada vértice, 
     void printGraph() const { // Forma alternativa a printGraph, aunque printGraph funciona igualmente
@@ -85,7 +120,7 @@ public:
         }
     }
 };
-
+/* NO ASEGURA QUE HAYA 1CC, NECESARIO, LO INDICA EL ENUNCIADO
 class RandGeomGraphedgePercol : public RandGeomGraph {
 public:
 
@@ -119,3 +154,4 @@ public:
         }
     }
 };
+*/
