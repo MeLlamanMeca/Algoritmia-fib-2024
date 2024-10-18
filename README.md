@@ -1,2 +1,6 @@
 # Percolation Conn threshold
-Meca voy a por tí
+compilado
+    g++ -O2 -o main main.cpp
+ejecución
+    ./main -nombregrafo -tipopercolacion
+    introducir semilla
