@@ -90,26 +90,26 @@ int main(int argc, char* argv[]) {
             
             for (int n = nini; n <= nfin; n += nstep) {
 
-                double qq = qini;
-                for (int q = 1; q <= qnum; ++q) {
+                double q = qini;
+                for (int qcont = 1; qcont <= qnum; ++qcont) {
                     double media = 0.0;
                     for (int muestra = 1; muestra <= muestras; ++muestra) {
                         Graph g;
                         if(string(argv[1]) == "-nxn") { // Generador de grafo nxn base
-                            if(string(argv[2]) == "-node") g = GraphNxNnodePercol(sqrt(n), qq);
-                            else if(string(argv[2]) == "-edge") g = GraphNxNedgePercol(sqrt(n), qq);  
+                            if(string(argv[2]) == "-node") g = GraphNxNnodePercol(sqrt(n), q);
+                            else if(string(argv[2]) == "-edge") g = GraphNxNedgePercol(sqrt(n), q);  
                         }
                         else if(string(argv[1]) == "-rgg") { // Generador de grafo aleatorio
-                            if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, qq);//no lo hacemos nunca
+                            if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, q);//no lo hacemos nunca
                             else if(string(argv[2]) == "-edge")  {
                                 //tiene que tener 1cc, la creadora lo asegura
                                 g = RandGeomGraph(n);  
-                                g.edgePercolation(qq);
+                                g.edgePercolation(q);
                             }
                         }
                         else if(string(argv[1]) == "-trg") { // Generador de grafo triangular
-                            if(string(argv[2]) == "-node") g = GraphTrgnodePercol(sqrt(n), qq);
-                            else if(string(argv[2]) == "-edge")  g = GraphTrgedgePercol(sqrt(n), qq);
+                            if(string(argv[2]) == "-node") g = GraphTrgnodePercol(sqrt(n), q);
+                            else if(string(argv[2]) == "-edge")  g = GraphTrgedgePercol(sqrt(n), q);
                         }  
                         media += g.calcularCC();
                     }
@@ -118,15 +118,15 @@ int main(int argc, char* argv[]) {
                     //Printear
                     if(string(argv[1]) == "-nxn") {
                         int num = sqrt(n);
-                        cout << "N: " << num*num << " Q: " << qq << " Media %CC: " << media <<endl;
+                        cout << "N: " << num*num << " Q: " << q << " Media %CC: " << media <<endl;
                     }
                     else if (string(argv[1]) == "-trg") {
                         int num = sqrt(n);
                         num = (num*(num+1))/2;
-                        cout << "N: " << num << " Q: " << qq << " Media %CC: " << media <<endl;
+                        cout << "N: " << num << " Q: " << q << " Media %CC: " << media <<endl;
                     }
-                    else cout << "N: " << n << " Q: " << qq << " Media %CC: " << media <<endl;
-                    qq += qstep;
+                    else cout << "N: " << n << " Q: " << q << " Media %CC: " << media <<endl;
+                    q += qstep;
                 }
                 
             }
