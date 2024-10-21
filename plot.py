@@ -65,7 +65,7 @@ if args.mask:
 elif not args.clear:
     for N in unique_N:
         mask = N_values == N
-        plt.plot(Q_values[mask], CC_values[mask], label=f'N = {N}', marker='o')
+        plt.plot(Q_values[mask], CC_values[mask], marker='o')
 
 # Flag --mean: graficar la curva promedio de todas las curvas
 if args.mean:
