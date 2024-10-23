@@ -84,6 +84,8 @@ if args.limit:
     mask = N_values == N_max
     plt.plot(Q_values[mask], CC_values[mask], label=f'Límite (N = {N_max})', marker='s', color='red', linestyle='-.')
 
+plt.xlim(0, 1)
+plt.ylim(0, 1)
 
 plt.xlabel('Q')
 plt.ylabel('Media %CC')
