@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
         else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg" || string(argv[1]) == "-trg") { // Modo de generación de grafos
             
             seed_generator();
-            if(argc == 9) {
+            if (argc == 9) {
                 nini = stoi(argv[3]);
                 nfin = stoi(argv[4]);
                 nstep = stoi(argv[5]);
@@ -88,55 +88,56 @@ int main(int argc, char* argv[]) {
                 muestras = stoi(argv[9]);
             }
             
+            int lastN = -1;
+
             for (int n = nini; n <= nfin; n += nstep) {
-
-                double qq = qini;
-                for (int q = 1; q <= qnum; ++q) {
-                    double media = 0.0;
-                    for (int muestra = 1; muestra <= muestras; ++muestra) {
-                        Graph g;
-                        if(string(argv[1]) == "-nxn") { // Generador de grafo nxn base
-                            if(string(argv[2]) == "-node") g = GraphNxNnodePercol(sqrt(n), qq);
-                            else if(string(argv[2]) == "-edge") g = GraphNxNedgePercol(sqrt(n), qq);  
-                        }
-                        else if(string(argv[1]) == "-rgg") { // Generador de grafo aleatorio
-                            if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, qq);//no lo hacemos nunca
-                            else if(string(argv[2]) == "-edge")  {
-                                //tiene que tener 1cc, la creadora lo asegura
-                                g = RandGeomGraph(n);  
-                                g.edgePercolation(qq);
+                if (string(argv[1]) == "-rgg" or lastN != sqrt(n)) {
+                    double qq = qini;
+                    for (int q = 1; q <= qnum; ++q) {
+                        double media = 0.0;
+                        for (int muestra = 1; muestra <= muestras; ++muestra) {
+                            Graph g;
+                            if(string(argv[1]) == "-nxn") { // Generador de grafo nxn base
+                                if(string(argv[2]) == "-node") g = GraphNxNnodePercol(sqrt(n), qq);
+                                else if(string(argv[2]) == "-edge") g = GraphNxNedgePercol(sqrt(n), qq);
+                                lastN = sqrt(n);
                             }
+                            else if(string(argv[1]) == "-rgg") { // Generador de grafo aleatorio
+                                if(string(argv[2]) == "-node") g = RandGeomGraphnodePercol(n, qq);//no lo hacemos nunca
+                                else if(string(argv[2]) == "-edge")  {
+                                    //tiene que tener 1cc, la creadora lo asegura
+                                    g = RandGeomGraph(n);  
+                                    g.edgePercolation(qq);
+                                }
+                                lastN = n;
+                            }
+                            else if(string(argv[1]) == "-trg") { // Generador de grafo triangular
+                                if(string(argv[2]) == "-node") g = GraphTrgnodePercol(sqrt(n), qq);
+                                else if(string(argv[2]) == "-edge")  g = GraphTrgedgePercol(sqrt(n), qq);
+                                lastN = sqrt(n);
+                            }  
+                            media += g.calcularCC();
                         }
-                        else if(string(argv[1]) == "-trg") { // Generador de grafo triangular
-                            if(string(argv[2]) == "-node") g = GraphTrgnodePercol(sqrt(n), qq);
-                            else if(string(argv[2]) == "-edge")  g = GraphTrgedgePercol(sqrt(n), qq);
-                        }  
-                        media += g.calcularCC();
-                    }
-                    media /= muestras;
+                        media /= muestras;
 
-                    //Printear
-                    if(string(argv[1]) == "-nxn") {
-                        int num = sqrt(n);
-                        cout << "N: " << num*num << " Q: " << qq << " Media %CC: " << media <<endl;
+                        //Printear
+                        if(string(argv[1]) == "-nxn") {
+                            int num = sqrt(n);
+                            cout << "N: " << num*num << " Q: " << qq << " Media %CC: " << media <<endl;
+                        }
+                        else if (string(argv[1]) == "-trg") {
+                            int num = sqrt(n);
+                            num = (num*(num+1))/2;
+                            cout << "N: " << num << " Q: " << qq << " Media %CC: " << media <<endl;
+                        }
+                        else cout << "N: " << n << " Q: " << qq << " Media %CC: " << media <<endl;
+                        qq += qstep;
                     }
-                    else if (string(argv[1]) == "-trg") {
-                        int num = sqrt(n);
-                        num = (num*(num+1))/2;
-                        cout << "N: " << num << " Q: " << qq << " Media %CC: " << media <<endl;
-                    }
-                    else cout << "N: " << n << " Q: " << qq << " Media %CC: " << media <<endl;
-                    qq += qstep;
-                }
-                
-            }
-            
+                }   
+            }  
         }
         else {
             usage();
         }
-
     }
-    
-   
 }

@@ -33,9 +33,9 @@ public:
     RandGeomGraph(int n) { //genera RGG con solo 1CC
         this->n = n;
         this->r = sqrt(log(n)/(M_PI*n));
-        do{
-            exist.resize(n, true);
-            plano.resize(n);
+        exist.resize(n, true);
+        plano.resize(n);
+        do {
             adyacencias = vector<set<int>>(n);
             //generar cordenada aleatoria plano[i] para cada nodo i
             for (int i = 0; i < n; ++i) {
@@ -58,6 +58,7 @@ public:
             }
         } while(masde1CC());
     }
+    
     bool masde1CC() {
         vector<bool> visited(adyacencias.size(), false);
         queue<int> c;
