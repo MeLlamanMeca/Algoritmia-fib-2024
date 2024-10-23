@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
         else if(string(argv[1]) == "-nxn" || string(argv[1]) == "-rgg" || string(argv[1]) == "-trg") { // Modo de generación de grafos
             
             seed_generator();
-            if (argc == 9) {
+            if (argc == 10) {
                 nini = stoi(argv[3]);
                 nfin = stoi(argv[4]);
                 nstep = stoi(argv[5]);
@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
             int lastN = -1;
 
             for (int n = nini; n <= nfin; n += nstep) {
-                if (string(argv[1]) == "-rgg" or lastN != sqrt(n)) {
+                if (string(argv[1]) == "-rgg" or lastN != int(sqrt(n))) {
                     double q = qini;
                     for (int qcont = 1; qcont <= qnum; ++qcont) {
                         double media = 0.0;
