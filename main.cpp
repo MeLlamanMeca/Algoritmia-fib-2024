@@ -120,20 +120,20 @@ int main(int argc, char* argv[]) {
                         }
                         media /= muestras;
 
-                    //Printear
-                    if(string(argv[1]) == "-nxn") {
-                        int num = sqrt(n);
-                        cout << "N: " << num*num << " Q: " << q << " Media %CC: " << media <<endl;
+                        //Printear
+                        if(string(argv[1]) == "-nxn") {
+                            int num = sqrt(n);
+                            cout << "N: " << num*num << " Q: " << q << " Media %CC: " << media <<endl;
+                        }
+                        else if (string(argv[1]) == "-trg") {
+                            int num = sqrt(n);
+                            num = (num*(num+1))/2;
+                            cout << "N: " << num << " Q: " << q << " Media %CC: " << media <<endl;
+                        }
+                        else cout << "N: " << n << " Q: " << q << " Media %CC: " << media <<endl;
+                        q += qstep;
                     }
-                    else if (string(argv[1]) == "-trg") {
-                        int num = sqrt(n);
-                        num = (num*(num+1))/2;
-                        cout << "N: " << num << " Q: " << q << " Media %CC: " << media <<endl;
-                    }
-                    else cout << "N: " << n << " Q: " << q << " Media %CC: " << media <<endl;
-                    q += qstep;
-                }
-                
+                }   
             }
             
         }
