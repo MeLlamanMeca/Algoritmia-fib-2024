@@ -42,9 +42,9 @@ void debbugging() { //Función editable para debugging, no visible para el usuar
 
 void usage() {
     cerr << "Error: Incorrect form of usage." << endl;
-    cout << "Usage: ./program_name [type] (percolation) ([N inicial] [n final] [Salto de N] [P inicial] [Numero de saltos] [Salto de P] [Muestras])" << endl;
+    cout << "Usage: ./program_name [type] [percolation] ([N inicial] [n final] [Salto de N] [P inicial] [Numero de saltos] [Salto de P] [Muestras])" << endl;
     cout << "[type]: -info | -nxn | -rgg | ..." << endl;
-    cout << "(percolation): -node | -edge (DEFAULT) | ... | ..." << endl;
+    cout << "[percolation]: -node | -edge (DEFAULT) | ... | ..." << endl;
     cout << "[compulsory] (optional)" << endl;
 }
 
